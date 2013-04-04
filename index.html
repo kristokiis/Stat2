@@ -7,6 +7,7 @@
 	<meta name="format-detection" content="telephone=no" />
 
 	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="phonegap.js"></script>
 	
 	<style type="text/css">
 		
@@ -224,6 +225,28 @@
   <script type="text/javascript" src="pdf.js"></script>
   
   <script type="text/javascript">
+  
+  	window.onerror = function (msg, url, line) {
+		if (window.device.platform != 'Generic') {
+	   		error_data = {};
+		   	error_data.function = '';
+		   	error_data.error = msg;
+		   	error_data.file = url;
+		   	error_data.line = line;
+		   
+		   	error_data.device_name = window.device.name;
+		   	error_data.device_platform = window.device.platform;
+		   	error_data.device_version = window.device.version;
+		   
+		   	error_data.data = {};
+		   	error_data.data.data = {};
+		   	error_data.data.user = {};
+		   
+		   	$.get('http://www.smarttasker.com/app/server.php?action=reportAnError', error_data, function(result) {}, 'jsonp');
+		}
+	}
+  
+  
   	$('body').scrollTop(0);
     function toggleMenu() {
 	    if ($('.content').hasClass('opened'))
