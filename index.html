@@ -1,0 +1,396 @@
+<html>
+<head>
+	<meta name="HandheldFriendly" content="True">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+
+	<script type="text/javascript" src="jquery.js"></script>
+	
+	<style type="text/css">
+		
+		body {
+			margin: 0;
+			width: 100%;
+		}
+		
+		h3 {
+			font-size: 16px;
+			width: 100%;
+			text-align: center;
+			margin-top: 2px;
+			margin-bottom: -18px;
+			height: 26px;
+		}
+		
+		.loader {
+			width: 100%;
+			height: 100%;
+			display: block;
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.5);
+			padding-top: 200px;
+			color: white;
+			text-align: center;
+			top: 0;
+			z-index: 99999;
+		}
+		
+		.content {
+			z-index: 99;
+			position: absolute;
+			top: 0;
+			left: 0;
+			-webkit-transition: all 600ms ease-out;
+			overflow: hidden;
+			width: 100%;
+			background-color: white;
+			-webkit-transform: translate3d(0, 0, 0);
+			/*height:;*/
+			background-color: white;
+			font-size: 14px;
+		}
+		
+		.content.animation {
+			
+		}
+		
+		.content.opened {
+			/*left: 260px;*/
+			-webkit-transform: translate3d(260px, 0, 0);
+		}
+		
+		.menu {
+			z-index: 0;
+			
+			width: 260px;
+		}
+		
+		.menu ul {
+			background-color: rgba(0, 0, 0, 0.8);
+			list-style: none;
+			padding-left: 0px;
+		}
+		ul li {
+			width: 100%;
+			padding-left: 20px;
+		}
+		.menu a {
+			font-size: 12px;
+			margin-top:4px;
+			margin-bottom:4px;
+			display: inline-block;
+			color: #515151;
+		}
+		
+		.page {
+			float: left;
+			width: 50%;
+			overflow-x: scroll;
+		}
+		
+		.page.animation {
+			-webkit-transition: all 400ms ease-out;
+		}
+		
+		.pages {
+			width: 200%;
+		}
+		
+		
+		#page-current {
+			-webkit-transform: translate3d(0, 0, 0);
+			
+		}
+		#page-next {
+			-webkit-transform: translate3d(0, 0, 0);
+		}
+		
+		.menu-bar {
+			position: relative;
+			height: 26px;
+		}
+		
+		.element-1 {
+			background-color: #d8cec6;
+		}
+		.element-2 {
+			background-color: #aacc99;
+		}
+		.element-3 {
+			background-color: #f5b689;
+		}
+		.element-4 {
+			background-color: #95c9d7;
+		}
+		.element-5 {
+			background-color: #f0ca90;
+		}
+		.element-6 {
+			background-color: #75c3ab;
+		}
+		.element-7 {
+			background-color: #aabfd6;
+		}
+		.element-8 {
+			background-color: #8fbebe;
+		}
+		.element-9 {
+			background-color: #cac09c;
+		}
+		.element-10 {
+			background-color: #cbbdbb;
+		}
+		.element-11 {
+			background-color: #f4bab7;
+		}
+		.element-12 {
+			background-color: #80cccb;
+		}
+		.element-13 {
+			background-color: #c3d281;
+		}
+		.element-14 {
+			background-color: #c4c0d3;
+		}
+		.element-15 {
+			background-color: #dbce75;
+		}
+		.element-16 {
+			background-color: #f5b689;
+		}
+		.element-17 {
+			background-color: #d8cec6;
+		}
+		.element-18 {
+			background-color: #cac09c;
+		}
+		
+		
+	</style>
+	
+</head>
+<body>
+	<span class="loader">Laen..</span>
+	<div class="menu" style="display:none;">
+		<h3>Menu:</h3>
+		<ul>
+			<li class="element-1"><a href="#" data-page="2">1. Republic of Estonia</a></li>
+			<li class="element-2"><a href="#" data-page="4">2. Nature</a></li>
+			<li class="element-3"><a href="#" data-page="6">3. Population</a></li>
+			<li class="element-4"><a href="#" data-page="10">4. Culture</a></li>
+			<li class="element-5"><a href="#" data-page="12">5. Public health</a></li>
+			<li class="element-6"><a href="#" data-page="16">6. Education</a></li>
+			<li class="element-7"><a href="#" data-page="18">7. Labour market</a></li>
+			<li class="element-8"><a href="#" data-page="22">8. Labour costs and wages (salaries)</a></li>
+			<li class="element-9"><a href="#" data-page="24">9. Gross domestic product</a></li>
+			<li class="element-10"><a href="#" data-page="28">10. Finance</a></li>
+			<li class="element-11"><a href="#" data-page="34">11. Foreign trade</a></li>
+			<li class="element-12"><a href="#" data-page="38">12. Industry</a></li>
+			<li class="element-13"><a href="#" data-page="42" >13. Agriculture</a></li>
+			<li class="element-14"><a href="#" data-page="44" >14. Energy</a></li>
+			<li class="element-15"><a href="#" data-page="46" >15. Research and developement</a></li>
+			<li class="element-16"><a href="#" data-page="48" >16. Information technology</a></li>
+			<li class="element-17"><a href="#" data-page="52" >17. Tourism</a></li>
+			<li class="element-18"><a href="#" data-page="54" >18. Data sources, Web sites on Estonia</a></li>
+		</ul>
+	
+	</div>
+	<div class="content">
+		<div class="menu-bar">
+		<button id="menuTrigger" onclick="toggleMenu()">Menu</button>
+		<button id="prev" onclick="goPrevious()"><-</button>
+		<button id="next" onclick="goNext()">-></button>
+		
+		&nbsp; &nbsp;
+		<span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+		&nbsp;&nbsp;
+		<button id="zoomIn" onclick="zoomIn()">+</button>
+		<button id="zoomOut" onclick="zoomOut()">-</button>
+		
+		</div>
+		<div class="pages" style="display:none;">
+			<div class="page animation" id="page-current">
+				<canvas id="the-canvas-current" style="border:1px solid black;"></canvas>
+				
+			</div>
+			<div class="page animation" id="page-next">
+				<canvas id="the-canvas-next" style="border:1px solid black"></canvas>
+			</div>
+		</div>
+	</div>
+  <!-- Use latest PDF.js build from Github -->
+  <script type="text/javascript" src="pdf.js"></script>
+  
+  <script type="text/javascript">
+  	$('body').scrollTop(0);
+    function toggleMenu() {
+	    if ($('.content').hasClass('opened'))
+	    	$('.content').removeClass('opened');
+	    else
+	    	$('.content').addClass('opened')
+	    
+    }
+    $(document).ready(function() {
+    	
+	    $('.menu').find('a').click(function(e) {
+		    e.preventDefault();
+		    pageNum = parseInt($(this).data('page'));
+		    renderPages(pageNum+2, true);
+		    $('.content').removeClass('opened');
+	    });
+	    
+	    //320 - 1
+	    //1278 - x	
+	    
+	       
+	    
+	    //alert('loaded'); 
+	    
+    });
+
+    
+    //
+    // NOTE: 
+    // Modifying the URL below to another server will likely *NOT* work. Because of browser
+    // security restrictions, we have to use a file server with special headers
+    // (CORS) - most servers don't support cross-origin browser requests.
+    //
+    var url = '2012.pdf';
+
+    //
+    // Disable workers to avoid yet another cross-origin issue (workers need the URL of
+    // the script to be loaded, and currently do not allow cross-origin scripts)
+    //
+    PDFJS.disableWorker = true;
+
+    var pdfDoc = null,
+        pageNum = 1,
+        scale = 1.0;
+    var canvas = {};
+    var ctx = {};
+    //
+    // Get page info from document, resize canvas accordingly, and render page
+    //
+    
+    width = $(window).width();
+	scale = width*1/305;
+	
+	$(window).resize(function() {
+		width = $(window).width();
+		scale = width*1/305;
+		renderPages(pageNum, true);
+	});
+    
+    function renderPages(num, current) {
+    	if(current) {
+		    canvas = document.getElementById('the-canvas-current'),
+	        ctx = canvas.getContext('2d');
+	        renderPage(num);
+        }
+        
+        canvas = document.getElementById('the-canvas-next'),
+        ctx = canvas.getContext('2d');
+        renderPage(num+1);
+        
+        document.getElementById('page_num').textContent = pageNum;
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+        
+    }
+    
+    function renderPage(num) {
+    
+      // Using promise to fetch the page
+      
+      console.log(scale);
+      
+      pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport(scale);
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Render PDF page into canvas context
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        
+        
+        
+        page.render(renderContext);
+        $('.menu').show();
+        $('.pages').show();
+	    $('.loader').fadeOut();
+        console.log(canvas);
+        
+      });
+
+      // Update page counters
+      
+    }
+    
+    function zoomIn() {
+	    
+	    scale = scale + 0.1;
+	    renderPages(pageNum, true);
+    }
+    
+    function zoomOut() {
+	    
+	    scale = scale - 0.1;
+	    if (scale < 1)
+	    	scale = 1;
+	    renderPages(pageNum, true);
+    }
+
+    //
+    // Go to previous page
+    //
+    function goPrevious() {
+      if (pageNum <= 1)
+        return;
+      pageNum--;
+      renderPages(pageNum, true);
+    }
+
+    //
+    // Go to next page
+    //
+    function goNext() {
+      if (pageNum >= pdfDoc.numPages)
+        return;
+      pageNum++;
+      $('.page').css({webkitTransform: "translate3d(-100%, 0, 0)"});
+      setTimeout(function() {
+	      $('.page:first').remove();
+	      $('.page').removeClass('animation');
+	      $('.page').attr('id', 'page-current');
+	      $('.page').find('canvas').attr('id', 'the-canvas-current');
+	      $('.page').css({webkitTransform: "translate3d(0, 0, 0)"});
+	      $('.pages').append('<div class="page animation" id="page-next"><canvas id="the-canvas-next" style="border:1px solid black"></canvas></div>');
+	      setTimeout(function() {
+	      	  $('.page:first').addClass('animation');
+		      renderPages(pageNum, false);
+	      }, 400);
+	      
+      }, 600);
+      
+      
+      
+      //$('#page-next').css({webkitTransform: "translate3d(-491px, 0, 0)"});
+      
+    }
+
+    //
+    // Asynchronously download PDF as an ArrayBuffer
+    // ADD LOADER
+    PDFJS.getDocument(url).then(function(_pdfDoc) {
+      console.log('loaded?');
+      pdfDoc = _pdfDoc;
+      
+      renderPages(pageNum, true);
+    });
+  </script>  
+</body>
+</html>
