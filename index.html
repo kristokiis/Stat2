@@ -7,7 +7,6 @@
 	<meta name="format-detection" content="telephone=no" />
 
 	<script type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript" src="phonegap.js"></script>
 	
 	<style type="text/css">
 		
@@ -267,12 +266,7 @@
 	    //320 - 1
 	    //1278 - x	
 	    
-	    PDFJS.getDocument(url).then(function(_pdfDoc) {
-      console.log('loaded?');
-      pdfDoc = _pdfDoc;
-      
-      renderPages(pageNum, true);
-    });
+	
 	    
 	    //alert('loaded'); 
 	    
@@ -332,10 +326,15 @@
     }
     
     function renderPage(num) {
-    
+      
       // Using promise to fetch the page
       
       console.log(scale);
+      
+      $('.menu').show();
+        $('.pages').show();
+	    $('.loader').fadeOut();
+        console.log(canvas);
       
       pdfDoc.getPage(num).then(function(page) {
         var viewport = page.getViewport(scale);
@@ -347,14 +346,9 @@
           canvasContext: ctx,
           viewport: viewport
         };
-        
-        
+
         
         page.render(renderContext);
-        $('.menu').show();
-        $('.pages').show();
-	    $('.loader').fadeOut();
-        console.log(canvas);
         
       });
 
@@ -413,6 +407,14 @@
       //$('#page-next').css({webkitTransform: "translate3d(-491px, 0, 0)"});
       
     }
+    
+    PDFJS.getDocument(url).then(function(_pdfDoc) {
+      console.log('loaded?');
+      
+      pdfDoc = _pdfDoc;
+      
+      renderPages(pageNum, true);
+    });
 
     //
     // Asynchronously download PDF as an ArrayBuffer
