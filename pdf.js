@@ -16,8 +16,8 @@
  */
 
 var PDFJS = {};
-PDFJS.version = '0.8.18';
-PDFJS.build = 'ab2cf87';
+PDFJS.version = '0.8.29';
+PDFJS.build = '6051b82';
 
 (function pdfjsWrapper() {
   // Use strict in our context only - users might not want it
@@ -88,7 +88,7 @@ function getPdf(arg, callback) {
   xhr.mozResponseType = xhr.responseType = 'arraybuffer';
 
   var protocol = params.url.substring(0, params.url.indexOf(':') + 1);
-  xhr.expected = (protocol === 'http:' || protocol === 'file:' || protocol === 'https:') ? 200 : 0;
+  xhr.expected = (protocol === 'http:' || protocol === 'https:' || protocol === 'file:') ? 200 : 0;
 
   if ('progress' in params)
     xhr.onprogress = params.progress || undefined;
@@ -3956,7 +3956,7 @@ var Dict = (function DictClosure() {
   }
 
   Dict.prototype = {
-    assignXref: function Dict_assingXref(newXref) {
+    assignXref: function Dict_assignXref(newXref) {
       this.xref = newXref;
     },
 
@@ -14392,10 +14392,6 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
         self.getOperatorList(xobj,
             xobj.dict.get('Resources') || resources,
             dependencyArray, queue);
-
-        self.getOperatorList(xobj,
-                             xobj.dict.get('Resources') || resources,
-                             dependencyArray, queue);
 
         // Add the dependencies that are required to execute the
         // operatorList.
