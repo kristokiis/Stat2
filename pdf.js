@@ -89,7 +89,9 @@ function getPdf(arg, callback) {
 
   var protocol = params.url.substring(0, params.url.indexOf(':') + 1);
   xhr.expected = (protocol === 'http:' || protocol === 'https:' || protocol === 'file:') ? 200 : 0;
-
+  
+  console.log(xhr.expected);
+  
   if ('progress' in params)
     xhr.onprogress = params.progress || undefined;
 
@@ -105,11 +107,16 @@ function getPdf(arg, callback) {
   }
 
   xhr.onreadystatechange = function getPdfOnreadystatechange(e) {
+  	
     if (xhr.readyState === 4) {
-      if (xhr.status === xhr.expected) {
+    
+      console.log('called back..' + xhr.status + ' ja protokoll:' + protocol);
+    
+      if (1 === 1) {
         var data = (xhr.mozResponseArrayBuffer || xhr.mozResponse ||
                     xhr.responseArrayBuffer || xhr.response);
         callback(data);
+        
       } else if (params.error && !calledErrorBack) {
         calledErrorBack = true;
         params.error(e);

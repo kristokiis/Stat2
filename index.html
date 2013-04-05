@@ -267,7 +267,12 @@
 	    //320 - 1
 	    //1278 - x	
 	    
-	       
+	    PDFJS.getDocument(url).then(function(_pdfDoc) {
+      console.log('loaded?');
+      pdfDoc = _pdfDoc;
+      
+      renderPages(pageNum, true);
+    });
 	    
 	    //alert('loaded'); 
 	    
@@ -307,6 +312,11 @@
 	});
     
     function renderPages(num, current) {
+    	
+    	document.getElementById('page_num').textContent = num;
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+    
+    	//console.log('called renderer!');
     	if(current) {
 		    canvas = document.getElementById('the-canvas-current'),
 	        ctx = canvas.getContext('2d');
@@ -317,8 +327,7 @@
         ctx = canvas.getContext('2d');
         renderPage(num+1);
         
-        document.getElementById('page_num').textContent = pageNum;
-        document.getElementById('page_count').textContent = pdfDoc.numPages;
+       
         
     }
     
@@ -408,12 +417,7 @@
     //
     // Asynchronously download PDF as an ArrayBuffer
     // ADD LOADER
-    PDFJS.getDocument(url).then(function(_pdfDoc) {
-      console.log('loaded?');
-      pdfDoc = _pdfDoc;
-      
-      renderPages(pageNum, true);
-    });
+    
   </script>  
 </body>
 </html>
